@@ -24,7 +24,8 @@ public class Product {
 	private String origin;
 	private String product;
 	private Double promotionalPrice;
-
+	private Double priceInINR;
+	private Double promotionalPriceInINR;
 	
 	
 

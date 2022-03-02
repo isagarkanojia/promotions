@@ -4,6 +4,7 @@ import com.fynd.promotions.modal.Product;
 import com.fynd.promotions.repository.ProductRespository;
 import com.fynd.promotions.strategies.Promotion;
 import com.fynd.promotions.strategies.PromotionFactory;
+import com.fynd.promotions.utils.CurrencyConverter;
 import com.fynd.promotions.utils.PromotionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,9 @@ public class PromotionsScheduler {
 
             promotion.apply(product);
 
-            log.info("Price: {} Promotional Price: {} Product: {}",product.getPrice(),product.getPromotionalPrice(),product.getProduct());
+            CurrencyConverter.setProductPriceInINR(product);
+
+            log.info("Price: {} INR Promotional Price: {} INR Product: {}", product.getPriceInINR(), product.getPromotionalPriceInINR(), product.getProduct());
 
         }
     }
