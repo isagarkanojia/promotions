@@ -2,6 +2,7 @@ package com.fynd.promotions.services;
 
 import java.util.List;
 
+import com.fynd.promotions.constants.PromotionConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -15,30 +16,19 @@ import com.fynd.promotions.repository.ProductRespository;
 @Service
 public class DataService {
 
-	@Autowired(required = true)
-	private RestTemplate restTemplate;
+    @Autowired(required = true)
+    private RestTemplate restTemplate;
 
-	@Autowired
-	private ProductRespository productRespository;
-	
-	public void getData() {
+    @Autowired
+    private ProductRespository productRespository;
 
-		String URL = "https://api.jsonbin.io/b/5d31a1c4536bb970455172ca/latest";
+    public void getData() {
+        ResponseEntity<List<Product>> responseEntity = restTemplate.exchange(PromotionConstants.API_URL, HttpMethod.GET, null,
+                new ParameterizedTypeReference<>() {
+                });
 
-		ResponseEntity<List<Product>> responseEntity = restTemplate.exchange(URL, HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<Product>>() {
-				});
-
-		List<Product> list = responseEntity.getBody();
-
-
-		for (Product p : list) {
-			System.out.println(p);
-		}
-
-		productRespository.saveAll(list);
-		
-		
-	}
+        List<Product> list = responseEntity.getBody();
+        productRespository.saveAll(list);
+    }
 
 }

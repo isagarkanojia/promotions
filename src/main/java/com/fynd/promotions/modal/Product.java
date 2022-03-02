@@ -1,11 +1,15 @@
 package com.fynd.promotions.modal;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
+@Data
 public class Product {
 
 	@Id
@@ -19,69 +23,8 @@ public class Product {
 	private Double price;
 	private String origin;
 	private String product;
-	
-	
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	public Integer getInventory() {
-		return inventory;
-	}
-	public void setInventory(Integer inventory) {
-		this.inventory = inventory;
-	}
-	public String getArrival() {
-		return arrival;
-	}
-	public void setArrival(String arrival) {
-		this.arrival = arrival;
-	}
-	public Integer getRating() {
-		return rating;
-	}
-	public void setRating(Integer rating) {
-		this.rating = rating;
-	}
-	public String getCurrency() {
-		return currency;
-	}
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-	public Double getPrice() {
-		return price;
-	}
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-	public String getOrigin() {
-		return origin;
-	}
-	public void setOrigin(String origin) {
-		this.origin = origin;
-	}
-	public String getProduct() {
-		return product;
-	}
-	public void setProduct(String product) {
-		this.product = product;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", category=" + category + ", inventory=" + inventory + ", arrival=" + arrival
-				+ ", rating=" + rating + ", currency=" + currency + ", price=" + price + ", origin=" + origin
-				+ ", product=" + product + "]";
-	}
-	
+	private Double promotionalPrice;
+
 	
 	
 
