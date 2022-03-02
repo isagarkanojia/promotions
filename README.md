@@ -4,7 +4,7 @@
 
 ### Features: 
 
-1. Get the Result from API: https://api.jsonbin.io/b/5d31a1c4536bb970455172ca/latest
+1. Get the Result from API: https://api.jsonbin.io/b/621f9e8a7caf5d67835dbc3b
 2. Find a way to convert the Currency to INR
 3. Run a Timely Promotion only one at a time
     ### Promotion Set A
