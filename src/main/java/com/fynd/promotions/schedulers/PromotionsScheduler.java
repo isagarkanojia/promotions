@@ -23,7 +23,7 @@ public class PromotionsScheduler {
     @Autowired
     private PromotionFactory promotionFactory;
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(cron = "${cronExpression}")
     void updatePromotions() {
 
         List<Product> list = productRespository.findAll();
@@ -34,7 +34,7 @@ public class PromotionsScheduler {
 
             promotion.apply(product);
 
-            CurrencyConverter.setProductPriceInINR(product);
+            product.setPriceInINR(CurrencyConverter.toINR(product.getPrice(), product.getCurrency()));
 
             log.info("Price: {} INR Promotional Price: {} INR Product: {}", product.getPriceInINR(), product.getPromotionalPriceInINR(), product.getProduct());
 

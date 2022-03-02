@@ -3,6 +3,7 @@ package com.fynd.promotions.strategies;
 import com.fynd.promotions.constants.enums.PromotionName;
 import com.fynd.promotions.modal.Product;
 import com.fynd.promotions.repository.ProductRespository;
+import com.fynd.promotions.utils.CurrencyConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class PromotionSetB extends Promotion {
     @Override
     public void apply(Product product) {
 
-        Double price = product.getPrice();
+        Double price = CurrencyConverter.toINR(product.getPrice(),product.getCurrency());
 
         Double maxDiscount = 0D;
 
@@ -27,14 +28,14 @@ public class PromotionSetB extends Promotion {
             Math.max(maxDiscount, calculateDiscount(price, 12));
         }
 
-        if (Objects.equals(product.getCategory(), "electronics")) {
+        if (Objects.nonNull(product.getArrival()) && Objects.equals(product.getArrival(), "NEW")) {
             Math.max(maxDiscount, calculateDiscount(price, 7));
         }
 
         if (Objects.equals(maxDiscount, 0D)) {
             applyDefaultPromotion(product);
         } else {
-            product.setPromotionalPrice(price - maxDiscount);
+            product.setPromotionalPriceInINR(price - maxDiscount);
         }
 
         this.productRespository.save(product);

@@ -4,6 +4,7 @@ import com.fynd.promotions.constants.PromotionConstants;
 import com.fynd.promotions.constants.enums.PromotionName;
 import com.fynd.promotions.modal.Product;
 import com.fynd.promotions.repository.ProductRespository;
+import com.fynd.promotions.utils.CurrencyConverter;
 import com.fynd.promotions.utils.PromotionUtils;
 
 public abstract class Promotion {
@@ -16,11 +17,13 @@ public abstract class Promotion {
 
     protected Product applyDefaultPromotion(Product product) {
 
-        if (product.getPrice().doubleValue() > PromotionConstants.DEFAULT_AMOUNT_FOR_DISCOUNT.doubleValue()) {
+        Double price = CurrencyConverter.toINR(product.getPrice(), product.getCurrency());
 
-            Double promotionalPrice = calculateDiscount(product.getPrice(), PromotionConstants.DEFAUL_DISCOUNT_PERCENTAGE);
+        if (price > PromotionConstants.DEFAULT_AMOUNT_FOR_DISCOUNT.doubleValue()) {
 
-            product.setPromotionalPrice(product.getPrice() - promotionalPrice);
+            Double promotionalPrice = calculateDiscount(price, PromotionConstants.DEFAUL_DISCOUNT_PERCENTAGE);
+
+            product.setPromotionalPriceInINR(price - promotionalPrice);
 
             return product;
         }
@@ -29,6 +32,6 @@ public abstract class Promotion {
     }
 
     protected Double calculateDiscount(double price, double percentage) {
-        return  PromotionUtils.calculateDiscount(price,percentage);
+        return PromotionUtils.calculateDiscount(price, percentage);
     }
 }
