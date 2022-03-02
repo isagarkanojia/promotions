@@ -28,19 +28,8 @@ public class CurrencyConverter {
             case US_DOLLAR:
                 return amount / INR_TO_US_DOLLAR;
             default:
-                return -1.f;
+                return -1.d;
         }
-    }
-
-    public static void setProductPriceInINR(Product product) {
-
-        if (Objects.nonNull(product.getPrice())) {
-            product.setPriceInINR(CurrencyConverter.toINR(product.getPrice(), product.getCurrency()));
-        }
-        if (Objects.nonNull(product.getPromotionalPrice())) {
-            product.setPromotionalPriceInINR(CurrencyConverter.toINR(product.getPromotionalPrice(), product.getCurrency()));
-        }
-
     }
 
 }
