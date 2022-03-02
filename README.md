@@ -12,7 +12,7 @@
       2. There will be a discount of 4% if the product rating is equal to 2 and 8 % if the product rating is below 2
     ### Promotion Set B:
       1. There will be a 12% discount on the prices if the inventory is more than 20
-      2. There will be a discount of 7% if the product arrival status is new
+      2. There will be a discount of 7% if the product category is electronics
 ### Common Rules:
 1. There can only be one discount applied at a time for each Promotion Set
 2. You have to apply the discount which provides the highest discount to the customer
